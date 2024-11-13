@@ -7,6 +7,11 @@ This project involves analyzing the log returns of the S&P 500 index and relevan
 - **Data Visualization and Statistical Modeling:** Use machine learning and econometrics tools to examine and visualize correlations and trends.
 - **Time-Series Analysis:** Clean and resample data, manage missing values, and apply time series methods to interpret the data accurately.
 
+## Strategy Definition and Economic Inference
+The analysis strategy was carefully structured to capture how specific macroeconomic indicators correlate with the S&P 500 returns, using insights based on:
+- **Macroeconomic Theory**: The model reflects economic theories linking bond yields, inflation (CPI), and industrial performance as indicators of economic health and their respective impacts on equity markets. Higher CPI, for example, is often associated with inflationary pressures, which can negatively impact stock markets, whereas strong industrial indices may indicate economic growth, positively affecting returns.
+- **Predictive Lagging Strategy**: By shifting economic indicators one period forward, the analysis captures how previous values of CPI and industrial indices might impact subsequent stock returns. This time-lagged approach aligns with econometric modeling practices and allows for a realistic, economically meaningful inference of causality, simulating how investors might respond to recent economic reports.
+
 ## Key Tools and Libraries
 The project leverages the following libraries and tools for data analysis, machine learning, and visualization:
 - **`yfinance`**: For obtaining historical data of financial assets.
@@ -36,6 +41,7 @@ To replicate the analysis, ensure the required libraries are installed, and run 
 ```bash
 pip install yfinance pandas matplotlib missingno statsmodels
 
-##Future Work
+
+## Future Work
 Potential extensions include applying machine learning models for forecasting or exploring additional economic indicators. 
 
