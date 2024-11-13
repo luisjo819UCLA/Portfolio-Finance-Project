@@ -1,79 +1,41 @@
-# USD-GBP Exchange Rate Forecasting Project
+# S&P 500 Log Returns Analysis Project
 
-This project leverages historical economic data to develop a trading strategy for forecasting the USD to GBP exchange rate. Using a dataset of economic indicators from the US and UK, we apply statistical and financial modeling to estimate exchange rate fluctuations and design a trading strategy based on Taylor rule fundamentals.
+This project involves analyzing the log returns of the S&P 500 index and relevant economic indicators from the UK and the US, aiming to provide insights for macroeconomic forecasting and financial modeling. The code makes extensive use of data manipulation, visualization, and statistical analysis tools to derive meaningful conclusions about market dynamics. This repository showcases skills in data preprocessing, handling missing values, and applying econometric models, all of which are relevant for finance and machine learning applications in economics.
 
-## Project Overview
+## Project Goals
+- **Analyze and process financial and economic data:** Extract meaningful insights from raw financial data, focusing on the impact of macroeconomic indicators on S&P 500 returns.
+- **Data Visualization and Statistical Modeling:** Use machine learning and econometrics tools to examine and visualize correlations and trends.
+- **Time-Series Analysis:** Clean and resample data, manage missing values, and apply time series methods to interpret the data accurately.
 
-The main objectives are:
-1. **Data Collection and Preprocessing**: Load and clean economic data for the US and UK.
-2. **Modeling Exchange Rate Movements**: Using Taylor rule fundamentals, forecast exchange rate changes based on economic indicators.
-3. **Optimization**: Identify hyperparameters that optimize cumulative returns, geometric mean, Sharpe ratio, and annualized returns.
+## Key Tools and Libraries
+The project leverages the following libraries and tools for data analysis, machine learning, and visualization:
+- **`yfinance`**: For obtaining historical data of financial assets.
+- **`pandas` and `numpy`**: For data manipulation, cleaning, and handling missing values.
+- **`matplotlib`**: For visualizing trends and key indicators within the data.
+- **`missingno`**: To identify and visualize missing values within the dataset.
+- **`statsmodels`**: For applying statistical models and econometric analysis.
 
-## Data Sources
+## Data Processing Steps
+1. **Data Loading and Initial Inspection**: Load historical data and perform an initial check for missing values.
+2. **Handling Missing Values**: Use a mix of `missingno` for visualization and `pandas` for interpolation and forward-filling to handle gaps in data.
+3. **Date Manipulation and Resampling**: Adjust date indices to monthly frequency for macroeconomic indicators and ensure alignment of data across multiple sources.
+4. **Data Shifting for Forecasting**: Shift certain columns to align current values with their subsequent impact, assisting in time-lagged analysis.
+5. **Modeling and Statistical Analysis**: Use `statsmodels` to apply statistical models to the processed data.
 
-The dataset comprises several economic indicators:
-- **Interest Rates**: 2-year treasury yields from both countries.
-- **Inflation**: Year-over-year CPI data.
-- **GDP Indicator**: Industrial index as a proxy for GDP.
-- **Exchange Rate**: USD to GBP exchange rate, sourced via the `yfinance` library.
+## Dataset
+The dataset used in this analysis includes economic indicators such as:
+- **USD and UK 2-Year Bond Yields**
+- **UK and US Year-over-Year Consumer Price Index (CPI)**
+- **UK and US Industrial Indices**
 
-Data spans from 2003 to 2024 and includes daily values for interest rates, inflation, and GDP proxies, with monthly exchange rate values. 
+This data provides a basis for understanding macroeconomic trends and examining their influence on market returns.
 
-## Project Structure
+## Usage
+To replicate the analysis, ensure the required libraries are installed, and run each cell in sequence to load and process the data.
 
-### 1. Data Preprocessing
+```bash
+pip install yfinance pandas matplotlib missingno statsmodels
 
-- Load and clean data (`final_project_data.csv`).
-- Handle missing values due to the monthly release frequency of certain indicators.
-- Convert interest rates to daily log returns and exchange rates to monthly log returns for consistency.
+##Future Work
+Potential extensions include applying machine learning models for forecasting or exploring additional economic indicators. 
 
-### 2. Feature Engineering
-
-- Create a moving average of the yield differential (`Y_diff`) as a key input for forecasting.
-- Transform interest rates and inflation indicators into simple returns for regression modeling.
-- Calculate the output gap using the linear trend model to derive potential GDP growth for each country.
-
-### 3. Forecasting Strategy
-
-#### Model
-The model forecasts exchange rate fluctuations using:
-- **Inflation Differential**: Difference between US and UK inflation.
-- **Output Gap Differential**: Derived from the Industrial index.
-- **Yield Differential**: Differential between the US and UK 2-year yields.
-
-#### Forecasting Steps
-- Use a rolling window approach to generate out-of-sample forecasts for exchange rate changes.
-- Estimate the change in exchange rates using the differential indicators in a Taylor rule-inspired model.
-
-### 4. Optimization of Hyperparameters
-
-Optimize hyperparameters (`output_window` and `exchange_window`) to maximize the Sharpe ratio and annualized return. This project found:
-- **Optimal Output Window**: 24 months for potential GDP estimation.
-- **Optimal Exchange Forecast Window**: 108 months for exchange rate prediction.
-
-### 5. Strategy Performance
-
-The strategy performance is evaluated by:
-- **Cumulative Returns**: Visualized as an equity line.
-- **Annualized Returns**: Calculated based on cumulative returns over the sample period.
-- **Sharpe Ratio**: Measures risk-adjusted returns for the model.
-
-### Key Results
-
-With the optimal window selection:
-- **Maximum Sharpe Ratio**: ~0.992
-- **Maximum Annualized Return**: ~5.23%
-
-The strategy was robust, as demonstrated by similar returns across various output and forecast windows.
-
-## Visualization
-
-- **Heatmap of Geometric Return**: Visualizes the performance across various `output_window` and `exchange_window` combinations.
-- **Equity Line Plot**: Shows cumulative returns over time for the optimal trading strategy.
-
-## Setup & Usage
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yourusername/yourprojectname.git
-   cd yourprojectname
