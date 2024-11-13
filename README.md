@@ -40,7 +40,7 @@ To replicate the analysis, ensure the required libraries are installed, and run 
 
 ```bash
 pip install yfinance pandas matplotlib missingno statsmodels
-
+```
 
 ## Future Work
 Potential extensions include applying machine learning models for forecasting or exploring additional economic indicators. 
